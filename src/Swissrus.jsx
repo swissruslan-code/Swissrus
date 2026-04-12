@@ -172,7 +172,7 @@ export default function Swissrus({ onNavigate }) {
               </p>
               <div className="hero-btns">
                 <a href="#areas" className="btn-primary">Explorar guías →</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); if (onNavigate) onNavigate("calculadora"); }} className="btn-secondary">Calcular mi neto</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); if (onNavigate) onNavigate("calculadora"); }} className="btn-secondary">CALCULA CUANTO GANARAS EN SUIZA</a>
               </div>
             </div>
 
@@ -242,7 +242,7 @@ export default function Swissrus({ onNavigate }) {
           ))}
         </div>
         <div style={{ marginTop: "1.5rem" }}>
-          <a href="#calc" className="btn-primary">Calcular mi neto exacto →</a>
+          <a href="#calc" className="btn-primary">CALCULA CUANTO GANARAS EN SUIZA exacto →</a>
         </div>
       </section>
 
