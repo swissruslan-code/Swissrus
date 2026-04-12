@@ -68,7 +68,7 @@ const CONSEJOS = [
   {
     icon: "📋",
     titulo: "Traer tu coche desde España",
-    desc: "Si llevas menos de 12 meses en Suiza y trajiste el coche antes de emigrar, puedes importarlo sin pagar IVA suizo (franquicia de mudanza). El plazo para solicitarlo es de 2 años desde tu llegada.",
+    desc: "Si el coche lleva más de 6 meses a tu nombre antes de emigrar, puedes importarlo sin pagar IVA suizo (franquicia de mudanza). Tienes hasta 2 años desde tu llegada para solicitarlo.",
   },
   {
     icon: "🔄",
