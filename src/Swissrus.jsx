@@ -172,7 +172,7 @@ export default function Swissrus({ onNavigate }) {
               </p>
               <div className="hero-btns">
                 <a href="#areas" className="btn-primary">Explorar guías →</a>
-                <a href="#calc" className="btn-secondary">Calcular mi neto</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); if (onNavigate) onNavigate("calculadora"); }} className="btn-secondary">Calcular mi neto</a>
               </div>
             </div>
 
