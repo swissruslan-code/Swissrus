@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 const NAV_LINKS = ["Permisos", "Salarios", "Sanidad", "Pensiones", "Calculadora", "Coches"];
 
 const AREAS = [
-  { icon: "📋", title: "Permisos de residencia", desc: "B, C, G y L explicados de forma clara." },
-  { icon: "💼", title: "Empleo", desc: "Salarios, contratos y el 13.º mes" },
+  { icon: "📋", title: "Permisos de residencia", desc: "B, C, G y L explicados de forma clara.", page: "permisos" },
+  { icon: "💼", title: "Empleo", desc: "Salarios, contratos y el 13.º mes", page: "salarios" },
   { icon: "🏠", title: "Vivienda", desc: "Cómo buscar piso y entender el contrato" },
-  { icon: "🚗", title: "Coches", desc: "Comprar, matricular o traer tu coche" },
-  { icon: "⚕️", title: "Sanidad", desc: "LAMal, franquicia y cómo ir al médico" },
+  { icon: "🚗", title: "Coches", desc: "Comprar, matricular o traer tu coche", page: "coches" },
+  { icon: "⚕️", title: "Sanidad", desc: "LAMal, franquicia y cómo ir al médico", page: "sanidad" },
   { icon: "🧮", title: "Calculadora Bruto → Neto", desc: "26 cantones · Quellensteuer oficial · BVG por edad" },
   { icon: "📊", title: "Impuestos", desc: "Quellensteuer, IRPF y declaración" },
-  { icon: "🏛️", title: "Pensiones", desc: "Los 3 pilares y cómo recuperar el 2.º" },
+  { icon: "🏛️", title: "Pensiones", desc: "Los 3 pilares y cómo recuperar el 2.º", page: "pensiones" },
   { icon: "✈️", title: "Vuelta a España", desc: "Baja consular y trámites al volver" },
 ];
 
