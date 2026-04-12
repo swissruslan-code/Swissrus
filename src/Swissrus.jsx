@@ -252,7 +252,7 @@ export default function Swissrus({ onNavigate }) {
       <section className="section">
         <div className="section-eyebrow">Comunidad</div>
         <h2 className="section-title">Lo que dicen los que <em>ya están aquí</em></h2>
-        <p className="section-sub">Experiencias reales de españoles que dieron el paso.</p>
+        <p className="section-sub">Experiencias reales de hispanohablantes que dieron el paso.</p>
         <div className="testimonios-grid">
           {TESTIMONIOS.map((t) => (
             <div key={t.nombre} className="testimonio">
@@ -269,7 +269,7 @@ export default function Swissrus({ onNavigate }) {
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
           <div style={{ fontSize: 10, color: "#ccc", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "sans-serif", flexShrink: 0 }}>Publicidad</div>
           <div style={{ flex: 1, minWidth: 200 }}>
-            <div style={{ fontFamily: "Georgia, serif", fontSize: 15, fontWeight: 700, color: "#111", marginBottom: 2 }}>¿Tu empresa trabaja con españoles en Suiza?</div>
+            <div style={{ fontFamily: "Georgia, serif", fontSize: 15, fontWeight: 700, color: "#111", marginBottom: 2 }}>¿Tu empresa trabaja con hispanohablantes en Suiza?</div>
             <div style={{ fontSize: 12, color: "#999", fontFamily: "sans-serif" }}>Gestoría, seguros, mudanzas, inmobiliaria — llega a miles de lectores cualificados</div>
           </div>
           <a href="mailto:hola@swissrus.ch" style={{ background: "#111", color: "white", padding: "0.6rem 1.4rem", fontSize: 12, fontWeight: 700, textDecoration: "none", fontFamily: "sans-serif", letterSpacing: "0.05em", textTransform: "uppercase", flexShrink: 0 }}>
