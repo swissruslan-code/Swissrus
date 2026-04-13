@@ -175,11 +175,20 @@ export default function Swissrus({ onNavigate }) {
               <span style={{ color: "#ffd700", display: "block" }}>10.000 CHF en Suiza</span>
             </h2>
             <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1.5rem", fontSize: "0.95rem", lineHeight: 1.7 }}>Recibe la guia completa en tu email. Gratuita. Sin spam.</p>
-            <div className="leadmagnet-form">
-              <input type="email" placeholder="tu@email.com" value={emailLeadMagnet} onChange={e => setEmailLeadMagnet(e.target.value)} />
-                <button className="btn-red" style={{ width: "100%", borderRadius: 2 }} onClick={async () => { if (!emailLeadMagnet) { window.location.href="/guia.pdf"; return; } try { await fetch("https://api.brevo.com/v3/contacts", { method: "POST", headers: { "Content-Type": "application/json", "api-key": import.meta.env.VITE_BREVO_KEY }, body: JSON.stringify({ email: emailLeadMagnet, listIds: [2] }) }); } catch(e) {} window.location.href="/guia.pdf"; }}>DESCARGAR AHORA - ES GRATIS</button>
-            </div>
-          </div>
+                <div className="leadmagnet-form">
+                  <iframe
+                    width="100%"
+                    height="120"
+                    src="https://a325486d.sibforms.com/serve/MUIFAGykwMByyexXVJgESqkNJEDGE1Q_d8cxd50-tYWyuIS_vbtu3cF88WTgLF1guqc3RURsj4wLCmctIOfgQmhYrW0qjJ3SAKjublw_55W-wTqRsjMXg-orSTuwG10E3ZbctpNRcpQySt_2ZPGLvaQOblxrtdQOEh8qd8gKgvmt247vlLIYrMXUoa8R3z1MsWYb1GDSZ3-pcnEZGQ=="
+                    frameBorder="0"
+                    scrolling="auto"
+                    style={{display:"block",marginLeft:"auto",marginRight:"auto",maxWidth:"100%",filter:"invert(1) hue-rotate(180deg)"}}
+                  ></iframe>
+                </div>
+
+
+
+
         </div>
       </div>
 
