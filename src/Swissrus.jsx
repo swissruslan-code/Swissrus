@@ -177,7 +177,7 @@ export default function Swissrus({ onNavigate }) {
             <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1.5rem", fontSize: "0.95rem", lineHeight: 1.7 }}>Recibe la guia completa en tu email. Gratuita. Sin spam.</p>
             <div className="leadmagnet-form">
               <input type="email" placeholder="tu@email.com" value={emailLeadMagnet} onChange={e => setEmailLeadMagnet(e.target.value)} />
-              <button className="btn-red" style={{ width: "100%", borderRadius: 2 }}>DESCARGAR AHORA - ES GRATIS</button>
+              <a href="/guia.pdf" download className="btn-red" style={{ width: "100%", borderRadius: 2, display: "block", textAlign: "center" }}>DESCARGAR AHORA - ES GRATIS</a>
             </div>
           </div>
         </div>
