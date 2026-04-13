@@ -177,7 +177,7 @@ export default function Swissrus({ onNavigate }) {
             <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1.5rem", fontSize: "0.95rem", lineHeight: 1.7 }}>Recibe la guia completa en tu email. Gratuita. Sin spam.</p>
             <div className="leadmagnet-form">
               <input type="email" placeholder="tu@email.com" value={emailLeadMagnet} onChange={e => setEmailLeadMagnet(e.target.value)} />
-              <a href="/guia.pdf" download className="btn-red" style={{ width: "100%", borderRadius: 2, display: "block", textAlign: "center" }}>DESCARGAR AHORA - ES GRATIS</a>
+                <button className="btn-red" style={{ width: "100%", borderRadius: 2 }} onClick={async () => { if (!emailLeadMagnet) { window.location.href="/guia.pdf"; return; } try { await fetch("https://api.brevo.com/v3/contacts", { method: "POST", headers: { "Content-Type": "application/json", "api-key": import.meta.env.VITE_BREVO_KEY }, body: JSON.stringify({ email: emailLeadMagnet, listIds: [2] }) }); } catch(e) {} window.location.href="/guia.pdf"; }}>DESCARGAR AHORA - ES GRATIS</button>
             </div>
           </div>
         </div>
