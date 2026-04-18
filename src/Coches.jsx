@@ -40,6 +40,7 @@ const COSTES = [
   { concepto: "Vigneta autovías", coste: "40 CHF/año", nota: "Obligatoria en autopistas" },
 ];
 
+// ✅ Solo queda @cochesensuiza — eliminado @swissrus_ch
 const CANALES_TELEGRAM = [
   {
     nombre: "Coches en Suiza",
@@ -48,14 +49,6 @@ const CANALES_TELEGRAM = [
     desc: "Compraventa de coches entre particulares en Suiza. Ofertas diarias, precios reales y sin intermediarios.",
     emoji: "🚗",
     color: "#c0392b",
-  },
-  {
-    nombre: "Swissrus",
-    handle: "@swissrus_ch",
-    url: "https://t.me/swissrus_ch",
-    desc: "Canal oficial de la comunidad. Noticias, cambios de ley, ofertas de empleo y consejos para vivir en Suiza.",
-    emoji: "🇨🇭",
-    color: "#2980b9",
   },
 ];
 
@@ -158,7 +151,7 @@ function AdBanner({ variant = "horizontal" }) {
           Publica tu anuncio en @cochesensuiza — gratis para particulares
         </div>
       </div>
-      <a
+      
         href="https://t.me/cochesensuiza"
         target="_blank"
         rel="noopener noreferrer"
@@ -192,15 +185,15 @@ export default function Coches() {
         </div>
       </div>
 
-      {/* CANALES TELEGRAM */}
+      {/* CANAL TELEGRAM — solo cochesensuiza */}
       <div style={s.section}>
         <div style={s.secEyebrow}>Comunidad</div>
-        <h2 style={s.secTitle}>Canales de <em style={s.secTitleEm}>Telegram</em></h2>
+        <h2 style={s.secTitle}>Canal de <em style={s.secTitleEm}>Telegram</em></h2>
         <p style={s.secSub}>Únete a la comunidad. Ofertas, consejos y novedades directamente en tu móvil.</p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, marginBottom: 32 }}>
+        <div style={{ marginBottom: 32 }}>
           {CANALES_TELEGRAM.map((canal) => (
-            <a
+            
               key={canal.handle}
               href={canal.url}
               target="_blank"
@@ -214,6 +207,7 @@ export default function Coches() {
                 textDecoration: "none",
                 color: "inherit",
                 transition: "box-shadow 0.2s, transform 0.2s",
+                maxWidth: 480,
               }}
               onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
               onMouseLeave={e => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "none"; }}
@@ -253,7 +247,6 @@ export default function Coches() {
           ))}
         </div>
 
-        {/* AD BANNER */}
         <AdBanner variant="horizontal" />
       </div>
 
@@ -321,7 +314,6 @@ export default function Coches() {
           ))}
         </div>
 
-        {/* AD BOX */}
         <div style={{ marginTop: 32 }}>
           <AdBanner variant="box" />
         </div>
@@ -380,7 +372,6 @@ export default function Coches() {
           ))}
         </div>
 
-        {/* FINAL AD BANNER */}
         <div style={{ marginTop: 40 }}>
           <AdBanner variant="horizontal" />
         </div>
