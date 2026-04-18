@@ -86,9 +86,18 @@ export default function Swissrus({ onNavigate }) {
         .final-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(192,57,43,0.15) 0%, transparent 70%); }
         .final-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
         .rocket { font-size: 3rem; margin-bottom: 1rem; display: block; }
-        .telegram-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 2rem 0; }
-        .telegram-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.4rem; text-decoration: none; color: inherit; display: flex; gap: 12px; align-items: flex-start; transition: background 0.2s; }
-        .telegram-card:hover { background: rgba(255,255,255,0.08); }
+        .coches-card-wrap { margin: 2rem auto; max-width: 480px; }
+        .coches-card-link { display: block; text-decoration: none; color: inherit; border-radius: 16px; overflow: hidden; position: relative; background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 50%, #1a0a0a 100%); border: 1px solid rgba(192,57,43,0.4); transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+        .coches-card-link:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(192,57,43,0.3); border-color: rgba(192,57,43,0.8); }
+        .coches-card-img { width: 100%; height: 180px; object-fit: cover; opacity: 0.5; display: block; }
+        .coches-card-body { padding: 1.6rem 1.8rem 1.8rem; }
+        .coches-card-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(192,57,43,0.25); border: 1px solid rgba(192,57,43,0.5); padding: 4px 10px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1rem; }
+        .coches-card-title { font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; text-transform: uppercase; color: white; line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+        .coches-card-handle { font-size: 13px; color: #e74c3c; font-weight: 700; margin-bottom: 0.8rem; }
+        .coches-card-desc { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 1.2rem; }
+        .coches-card-footer { display: flex; align-items: center; justify-content: space-between; }
+        .coches-card-cta { background: #c0392b; color: white; padding: 10px 20px; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; display: inline-block; }
+        .coches-card-sub { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.06em; }
         .ad-banner { background: #f8f8f8; border-top: 3px solid #e74c3c; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
         footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); padding: 2rem; text-align: center; }
         @media (max-width: 768px) {
@@ -237,17 +246,28 @@ export default function Swissrus({ onNavigate }) {
             Venir a Suiza sin informacion<br /><span style={{ color: "#e74c3c" }}>cuesta dinero</span>
           </h2>
           <p style={{ color: "#aaa", fontSize: "1rem", marginBottom: "2rem", lineHeight: 1.7 }}>Unete a la comunidad de hispanohablantes en Suiza.</p>
-          <div className="telegram-grid">
-            <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" className="telegram-card">
-              <div style={{ fontSize: 28 }}>🚗</div>
-              <div>
-                <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 15, fontWeight: 600, color: "white", textTransform: "uppercase" }}>Coches en Suiza</div>
-                <div style={{ fontSize: 12, color: "#e74c3c", fontWeight: 600, margin: "4px 0" }}>@cochesensuiza</div>
-                <div style={{ fontSize: 12, color: "#666" }}>Compraventa entre particulares. Ofertas diarias.</div>
+
+          <div className="coches-card-wrap">
+            <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" className="coches-card-link">
+              <img
+                src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80"
+                alt="Coches en Suiza"
+                className="coches-card-img"
+              />
+              <div className="coches-card-body">
+                <div className="coches-card-tag">📲 Canal de Telegram</div>
+                <div className="coches-card-title">Coches en Suiza</div>
+                <div className="coches-card-handle">@cochesensuiza</div>
+                <div className="coches-card-desc">Compraventa de coches entre particulares. Ofertas diarias, precios reales y sin intermediarios. El mayor canal de coches para hispanohablantes en Suiza.</div>
+                <div className="coches-card-footer">
+                  <span className="coches-card-cta">Unirme al canal →</span>
+                  <span className="coches-card-sub">🚗 Ofertas diarias</span>
+                </div>
               </div>
             </a>
           </div>
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: "1rem" }}>
+
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: "2rem" }}>
             <button className="btn-red" onClick={() => onNavigate && onNavigate("permisos")}>VER GUIA GRATIS</button>
           </div>
         </div>
