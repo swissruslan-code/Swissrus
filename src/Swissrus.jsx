@@ -26,7 +26,6 @@ const STATS = [
 
 export default function Swissrus({ onNavigate }) {
   const [visible, setVisible] = useState(false);
-  const [emailLeadMagnet, setEmailLeadMagnet] = useState("");
 
   useEffect(() => {
     setTimeout(() => setVisible(true), 100);
@@ -50,8 +49,6 @@ export default function Swissrus({ onNavigate }) {
         .btn-red:hover { background: #a93226; transform: translateY(-2px); }
         .btn-dark { background: rgba(255,255,255,0.08); color: white; padding: 1rem 2rem; font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
         .btn-dark:hover { background: rgba(255,255,255,0.15); }
-        .btn-green { background: #27ae60; color: white; padding: 1rem 2rem; font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
-        .btn-green:hover { background: #219a52; }
         .stats-bar { display: flex; gap: 2rem; flex-wrap: wrap; }
         .stat-num { font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 700; color: #e74c3c; line-height: 1; }
         .stat-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; max-width: 120px; line-height: 1.3; }
@@ -73,8 +70,6 @@ export default function Swissrus({ onNavigate }) {
         .book-emoji { font-size: 3rem; margin-bottom: 0.8rem; }
         .book-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: #111; font-weight: 700; text-transform: uppercase; line-height: 1.3; margin-bottom: 0.5rem; }
         .book-subtitle { font-size: 0.8rem; color: #c0392b; font-weight: 600; }
-        .leadmagnet-form input { width: 100%; padding: 1rem 1.2rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 0.95rem; outline: none; margin-bottom: 12px; border-radius: 2px; }
-        .leadmagnet-form input::placeholder { color: rgba(255,255,255,0.4); }
         .coches-section { background: #0f0f0f; padding: 5rem 2rem; }
         .coches-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .coches-img { position: relative; border-radius: 4px; overflow: hidden; aspect-ratio: 4/3; }
@@ -175,20 +170,17 @@ export default function Swissrus({ onNavigate }) {
               <span style={{ color: "#ffd700", display: "block" }}>3.000 CHF en Suiza</span>
             </h2>
             <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1.5rem", fontSize: "0.95rem", lineHeight: 1.7 }}>Recibe la guia completa en tu email. Gratuita. Sin spam.</p>
-                <div className="leadmagnet-form">
-                  <iframe
-                    width="100%"
-                    height="120"
-                    src="https://a325486d.sibforms.com/serve/MUIFAGykwMByyexXVJgESqkNJEDGE1Q_d8cxd50-tYWyuIS_vbtu3cF88WTgLF1guqc3RURsj4wLCmctIOfgQmhYrW0qjJ3SAKjublw_55W-wTqRsjMXg-orSTuwG10E3ZbctpNRcpQySt_2ZPGLvaQOblxrtdQOEh8qd8gKgvmt247vlLIYrMXUoa8R3z1MsWYb1GDSZ3-pcnEZGQ=="
-                    frameBorder="0"
-                    scrolling="auto"
-                    style={{display:"block",marginLeft:"auto",marginRight:"auto",maxWidth:"100%",filter:"invert(1) hue-rotate(180deg)"}}
-                  ></iframe>
-                </div>
-
-
-
-
+            <div className="leadmagnet-form">
+              <iframe
+                width="100%"
+                height="120"
+                src="https://a325486d.sibforms.com/serve/MUIFAGykwMByyexXVJgESqkNJEDGE1Q_d8cxd50-tYWyuIS_vbtu3cF88WTgLF1guqc3RURsj4wLCmctIOfgQmhYrW0qjJ3SAKjublw_55W-wTqRsjMXg-orSTuwG10E3ZbctpNRcpQySt_2ZPGLvaQOblxrtdQOEh8qd8gKgvmt247vlLIYrMXUoa8R3z1MsWYb1GDSZ3-pcnEZGQ=="
+                frameBorder="0"
+                scrolling="auto"
+                style={{ display: "block", marginLeft: "auto", marginRight: "auto", maxWidth: "100%", filter: "invert(1) hue-rotate(180deg)" }}
+              ></iframe>
+            </div>
+          </div>
         </div>
       </div>
 
