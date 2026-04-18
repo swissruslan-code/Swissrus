@@ -253,10 +253,7 @@ export default function Swissrus({ onNavigate }) {
                 <div style={{ fontSize: 12, color: "#e74c3c", fontWeight: 600, margin: "4px 0" }}>@cochesensuiza</div>
                 <div style={{ fontSize: 12, color: "#666" }}>Compraventa entre particulares. Ofertas diarias.</div>
               </div>
-            </a>
-            <a href="https://t.me/swissrus_ch" target="_blank" rel="noopener noreferrer" className="telegram-card">
-              <div style={{ fontSize: 28 }}>🇨🇭</div>
-              <div>
+            
                 <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 15, fontWeight: 600, color: "white", textTransform: "uppercase" }}>Swissrus</div>
                 <div style={{ fontSize: 12, color: "#3498db", fontWeight: 600, margin: "4px 0" }}>@swissrus_ch</div>
                 <div style={{ fontSize: 12, color: "#666" }}>Canal oficial. Noticias, leyes, empleo.</div>
