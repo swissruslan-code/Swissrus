@@ -37,7 +37,7 @@ export default function Swissrus({ onNavigate }) {
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         .hero-bg { position: relative; min-height: 100vh; background: linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%); overflow: hidden; display: flex; align-items: center; }
-        .hero-bg::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=80') center/cover; opacity: 0.25; z-index: 0; }
+        .hero-bg::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=80') center/cover; opacity: 0.55; z-index: 0; }
         .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.95) 40%, rgba(10,10,10,0.4) 100%); z-index: 1; }
         .hero-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 6rem 2rem 4rem; width: 100%; }
         .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.5); padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1.5rem; }
@@ -87,16 +87,16 @@ export default function Swissrus({ onNavigate }) {
         .final-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
         .rocket { font-size: 3rem; margin-bottom: 1rem; display: block; }
         .coches-card-wrap { margin: 2rem auto; max-width: 480px; }
-        .coches-card-link { display: block; text-decoration: none; color: inherit; border-radius: 16px; overflow: hidden; position: relative; background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 50%, #1a0a0a 100%); border: 1px solid rgba(192,57,43,0.4); transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+        .coches-card-link { display: block; text-decoration: none; color: inherit; border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 50%, #1a0a0a 100%); border: 1px solid rgba(192,57,43,0.4); transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
         .coches-card-link:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(192,57,43,0.3); border-color: rgba(192,57,43,0.8); }
         .coches-card-img { width: 100%; height: 180px; object-fit: cover; opacity: 0.5; display: block; }
         .coches-card-body { padding: 1.6rem 1.8rem 1.8rem; }
         .coches-card-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(192,57,43,0.25); border: 1px solid rgba(192,57,43,0.5); padding: 4px 10px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1rem; }
-        .coches-card-title { font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; text-transform: uppercase; color: white; line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+        .coches-card-title { font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; text-transform: uppercase; color: white; line-height: 1.1; margin-bottom: 0.5rem; }
         .coches-card-handle { font-size: 13px; color: #e74c3c; font-weight: 700; margin-bottom: 0.8rem; }
         .coches-card-desc { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 1.2rem; }
         .coches-card-footer { display: flex; align-items: center; justify-content: space-between; }
-        .coches-card-cta { background: #c0392b; color: white; padding: 10px 20px; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; display: inline-block; }
+        .coches-card-cta { background: #c0392b; color: white; padding: 10px 20px; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; }
         .coches-card-sub { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.06em; }
         .ad-banner { background: #f8f8f8; border-top: 3px solid #e74c3c; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
         footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); padding: 2rem; text-align: center; }
@@ -178,17 +178,12 @@ export default function Swissrus({ onNavigate }) {
               7 errores que te pueden hacer perder mas de
               <span style={{ color: "#ffd700", display: "block" }}>3.000 CHF en Suiza</span>
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1.5rem", fontSize: "0.95rem", lineHeight: 1.7 }}>Recibe la guia completa en tu email. Gratuita. Sin spam.</p>
-            <div className="leadmagnet-form">
-              <iframe
-                width="100%"
-                height="120"
-                src="https://a325486d.sibforms.com/serve/MUIFAGykwMByyexXVJgESqkNJEDGE1Q_d8cxd50-tYWyuIS_vbtu3cF88WTgLF1guqc3RURsj4wLCmctIOfgQmhYrW0qjJ3SAKjublw_55W-wTqRsjMXg-orSTuwG10E3ZbctpNRcpQySt_2ZPGLvaQOblxrtdQOEh8qd8gKgvmt247vlLIYrMXUoa8R3z1MsWYb1GDSZ3-pcnEZGQ=="
-                frameBorder="0"
-                scrolling="auto"
-                style={{ display: "block", marginLeft: "auto", marginRight: "auto", maxWidth: "100%", filter: "invert(1) hue-rotate(180deg)" }}
-              ></iframe>
-            </div>
+            <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "2rem", fontSize: "0.95rem", lineHeight: 1.7 }}>
+              La guia completa para hispanohablantes. Gratuita. Sin spam.
+            </p>
+            <button className="btn-red" onClick={() => onNavigate && onNavigate("permisos")} style={{ borderRadius: 4 }}>
+              VER GUIA GRATIS →
+            </button>
           </div>
         </div>
       </div>
@@ -246,19 +241,14 @@ export default function Swissrus({ onNavigate }) {
             Venir a Suiza sin informacion<br /><span style={{ color: "#e74c3c" }}>cuesta dinero</span>
           </h2>
           <p style={{ color: "#aaa", fontSize: "1rem", marginBottom: "2rem", lineHeight: 1.7 }}>Unete a la comunidad de hispanohablantes en Suiza.</p>
-
           <div className="coches-card-wrap">
             <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" className="coches-card-link">
-              <img
-                src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80"
-                alt="Coches en Suiza"
-                className="coches-card-img"
-              />
+              <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80" alt="Coches en Suiza" className="coches-card-img" />
               <div className="coches-card-body">
                 <div className="coches-card-tag">📲 Canal de Telegram</div>
                 <div className="coches-card-title">Coches en Suiza</div>
                 <div className="coches-card-handle">@cochesensuiza</div>
-                <div className="coches-card-desc">Compraventa de coches entre particulares. Ofertas diarias, precios reales y sin intermediarios. El mayor canal de coches para hispanohablantes en Suiza.</div>
+                <div className="coches-card-desc">Compraventa de coches entre particulares. Ofertas diarias, precios reales y sin intermediarios.</div>
                 <div className="coches-card-footer">
                   <span className="coches-card-cta">Unirme al canal →</span>
                   <span className="coches-card-sub">🚗 Ofertas diarias</span>
@@ -266,8 +256,7 @@ export default function Swissrus({ onNavigate }) {
               </div>
             </a>
           </div>
-
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: "2rem" }}>
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}>
             <button className="btn-red" onClick={() => onNavigate && onNavigate("permisos")}>VER GUIA GRATIS</button>
           </div>
         </div>
