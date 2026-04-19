@@ -82,22 +82,28 @@ export default function Swissrus({ onNavigate }) {
         .area-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
         .area-title { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; text-transform: uppercase; color: white; margin-bottom: 0.3rem; letter-spacing: 0.03em; }
         .area-desc { font-size: 0.82rem; color: #666; line-height: 1.5; }
-        .final-cta { background: #0a0a0a; padding: 6rem 2rem; text-align: center; position: relative; overflow: hidden; }
-        .final-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(192,57,43,0.15) 0%, transparent 70%); }
-        .final-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-        .rocket { font-size: 3rem; margin-bottom: 1rem; display: block; }
-        .coches-card-wrap { margin: 2rem auto; max-width: 480px; }
-        .coches-card-link { display: block; text-decoration: none; color: inherit; border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 50%, #1a0a0a 100%); border: 1px solid rgba(192,57,43,0.4); transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
-        .coches-card-link:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(192,57,43,0.3); border-color: rgba(192,57,43,0.8); }
-        .coches-card-img { width: 100%; height: 180px; object-fit: cover; opacity: 0.5; display: block; }
+        .final-cta { background: #0f0f0f; padding: 6rem 2rem; position: relative; overflow: hidden; }
+        .final-cta::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1400&q=80') center/cover; opacity: 0.08; }
+        .final-cta-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .cta-left { }
+        .cta-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1rem; }
+        .cta-title { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; text-transform: uppercase; line-height: 1.1; margin-bottom: 1rem; }
+        .cta-title .red { color: #e74c3c; }
+        .cta-desc { font-size: 1rem; color: #888; line-height: 1.7; margin-bottom: 2rem; max-width: 420px; }
+        .cta-stats { display: flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .cta-stat-num { font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; color: #e74c3c; line-height: 1; }
+        .cta-stat-label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
+        .coches-card-link { display: block; text-decoration: none; color: inherit; border-radius: 12px; overflow: hidden; background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 50%, #1a0a0a 100%); border: 1px solid rgba(192,57,43,0.4); transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 32px rgba(0,0,0,0.6); }
+        .coches-card-link:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(192,57,43,0.25); border-color: rgba(192,57,43,0.8); }
+        .coches-card-img { width: 100%; height: 200px; object-fit: cover; opacity: 0.6; display: block; }
         .coches-card-body { padding: 1.6rem 1.8rem 1.8rem; }
-        .coches-card-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(192,57,43,0.25); border: 1px solid rgba(192,57,43,0.5); padding: 4px 10px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1rem; }
-        .coches-card-title { font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; text-transform: uppercase; color: white; line-height: 1.1; margin-bottom: 0.5rem; }
+        .coches-card-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.4); padding: 4px 10px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1rem; }
+        .coches-card-title { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; text-transform: uppercase; color: white; line-height: 1.1; margin-bottom: 4px; }
         .coches-card-handle { font-size: 13px; color: #e74c3c; font-weight: 700; margin-bottom: 0.8rem; }
-        .coches-card-desc { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 1.2rem; }
+        .coches-card-desc { font-size: 13px; color: #777; line-height: 1.6; margin-bottom: 1.2rem; }
         .coches-card-footer { display: flex; align-items: center; justify-content: space-between; }
-        .coches-card-cta { background: #c0392b; color: white; padding: 10px 20px; font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; }
-        .coches-card-sub { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.06em; }
+        .coches-card-cta { background: #c0392b; color: white; padding: 10px 18px; font-family: 'Oswald', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; }
+        .coches-card-sub { font-size: 11px; color: #444; text-transform: uppercase; letter-spacing: 0.06em; }
         .ad-banner { background: #f8f8f8; border-top: 3px solid #e74c3c; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
         footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); padding: 2rem; text-align: center; }
         @media (max-width: 768px) {
@@ -107,6 +113,7 @@ export default function Swissrus({ onNavigate }) {
           .areas-grid { grid-template-columns: repeat(2, 1fr); }
           .hero-btns { flex-direction: column; }
           .leadmagnet-book { display: none; }
+          .final-cta-inner { grid-template-columns: 1fr; }
         }
       `}</style>
 
@@ -234,16 +241,37 @@ export default function Swissrus({ onNavigate }) {
         </div>
       </div>
 
+      {/* SECCIÓN FINAL — Canal de coches profesional */}
       <div className="final-cta">
         <div className="final-cta-inner">
-          <span className="rocket">🚗</span>
-          <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.1, marginBottom: "1rem" }}>
-            Coches en Suiza<br /><span style={{ color: "#e74c3c" }}>sin intermediarios</span>
-          </h2>
-          <p style={{ color: "#aaa", fontSize: "1rem", marginBottom: "2rem", lineHeight: 1.7 }}>
-            Compra y vende coches entre particulares. Ofertas diarias, precios reales y sin comisiones. El mayor canal de coches para hispanohablantes en Suiza.
-          </p>
-          <div className="coches-card-wrap">
+          <div className="cta-left">
+            <div className="cta-eyebrow">🚗 Canal de Telegram</div>
+            <h2 className="cta-title">
+              Coches en Suiza<br />
+              <span className="red">sin intermediarios</span>
+            </h2>
+            <p className="cta-desc">
+              El canal de referencia para comprar y vender coches entre particulares en Suiza. Ofertas diarias, precios reales, sin comisiones y en español.
+            </p>
+            <div className="cta-stats">
+              <div>
+                <div className="cta-stat-num">Diario</div>
+                <div className="cta-stat-label">Nuevas ofertas</div>
+              </div>
+              <div>
+                <div className="cta-stat-num">0€</div>
+                <div className="cta-stat-label">Sin comisiones</div>
+              </div>
+              <div>
+                <div className="cta-stat-num">🇨🇭</div>
+                <div className="cta-stat-label">Solo en Suiza</div>
+              </div>
+            </div>
+            <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" className="btn-red" style={{ borderRadius: 4 }}>
+              UNIRME A @COCHESENSUIZA →
+            </a>
+          </div>
+          <div>
             <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" className="coches-card-link">
               <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80" alt="Coches en Suiza" className="coches-card-img" />
               <div className="coches-card-body">
@@ -257,9 +285,6 @@ export default function Swissrus({ onNavigate }) {
                 </div>
               </div>
             </a>
-          </div>
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}>
-            <button className="btn-red" onClick={() => onNavigate && onNavigate("permisos")}>VER GUIA GRATIS</button>
           </div>
         </div>
       </div>
