@@ -236,11 +236,13 @@ export default function Swissrus({ onNavigate }) {
 
       <div className="final-cta">
         <div className="final-cta-inner">
-          <span className="rocket">🚀</span>
+          <span className="rocket">🚗</span>
           <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.1, marginBottom: "1rem" }}>
-            Venir a Suiza sin informacion<br /><span style={{ color: "#e74c3c" }}>cuesta dinero</span>
+            Compra o vende tu coche<br /><span style={{ color: "#e74c3c" }}>entre particulares</span>
           </h2>
-          <p style={{ color: "#aaa", fontSize: "1rem", marginBottom: "2rem", lineHeight: 1.7 }}>Unete a la comunidad de hispanohablantes en Suiza.</p>
+          <p style={{ color: "#aaa", fontSize: "1rem", marginBottom: "2rem", lineHeight: 1.7 }}>
+            El canal de Telegram con ofertas diarias de coches en Suiza. Sin intermediarios, precios reales.
+          </p>
           <div className="coches-card-wrap">
             <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" className="coches-card-link">
               <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80" alt="Coches en Suiza" className="coches-card-img" />
