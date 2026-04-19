@@ -238,10 +238,10 @@ export default function Swissrus({ onNavigate }) {
         <div className="final-cta-inner">
           <span className="rocket">🚗</span>
           <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.1, marginBottom: "1rem" }}>
-            Compra o vende tu coche<br /><span style={{ color: "#e74c3c" }}>entre particulares</span>
+            Coches en Suiza<br /><span style={{ color: "#e74c3c" }}>sin intermediarios</span>
           </h2>
           <p style={{ color: "#aaa", fontSize: "1rem", marginBottom: "2rem", lineHeight: 1.7 }}>
-            El canal de Telegram con ofertas diarias de coches en Suiza. Sin intermediarios, precios reales.
+            Compra y vende coches entre particulares. Ofertas diarias, precios reales y sin comisiones. El mayor canal de coches para hispanohablantes en Suiza.
           </p>
           <div className="coches-card-wrap">
             <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" className="coches-card-link">
