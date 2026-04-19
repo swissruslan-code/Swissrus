@@ -3,8 +3,8 @@ import { useState } from "react";
 const PASOS_MATRICULACION = [
   {
     num: "01",
-    titulo: "Inspección técnica (MFK)",
-    desc: "Todo vehículo importado debe pasar la inspección técnica cantonal (MFK). Lleva el coche al centro de inspección de tu cantón. Coste: 80–150 CHF según cantón.",
+    titulo: "Inspeccion tecnica (MFK)",
+    desc: "Todo vehiculo importado debe pasar la inspeccion tecnica cantonal (MFK). Lleva el coche al centro de inspeccion de tu canton. Coste: 80-150 CHF segun canton.",
   },
   {
     num: "02",
@@ -13,18 +13,18 @@ const PASOS_MATRICULACION = [
   },
   {
     num: "03",
-    titulo: "Registro en la Oficina de Tráfico cantonal",
-    desc: "Acude a la Strassenverkehrsamt (o Service des automobiles) de tu cantón con toda la documentación. Recibirás las placas suizas y el permiso de circulación.",
+    titulo: "Registro en la Oficina de Trafico cantonal",
+    desc: "Acude a la Strassenverkehrsamt (o Service des automobiles) de tu canton con toda la documentacion. Recibiras las placas suizas y el permiso de circulacion.",
   },
   {
     num: "04",
-    titulo: "Pago del impuesto de circulación",
-    desc: "Cada cantón cobra un impuesto anual basado en el peso, cilindrada o potencia. Va de 100 CHF a más de 1.000 CHF al año.",
+    titulo: "Pago del impuesto de circulacion",
+    desc: "Cada canton cobra un impuesto anual basado en el peso, cilindrada o potencia. Va de 100 CHF a mas de 1.000 CHF al ano.",
   },
 ];
 
 const DOCS_IMPORTACION = [
-  "Título de propiedad (ficha técnica española o título de circulación)",
+  "Titulo de propiedad (ficha tecnica espanola o titulo de circulacion)",
   "Pasaporte o DNI + permiso de residencia suizo",
   "Prueba del seguro RC suizo",
   "Factura de compra o prueba de pago de IVA en origen",
@@ -32,15 +32,14 @@ const DOCS_IMPORTACION = [
 ];
 
 const COSTES = [
-  { concepto: "Inspección MFK", coste: "80–150 CHF", nota: "Única vez al importar" },
-  { concepto: "Tasas de matriculación", coste: "60–120 CHF", nota: "Varía por cantón" },
-  { concepto: "Placas de matrícula", coste: "30–50 CHF", nota: "Precio estándar" },
-  { concepto: "Seguro RC anual (básico)", coste: "500–900 CHF", nota: "Según conductor y coche" },
-  { concepto: "Impuesto de circulación anual", coste: "100–1.000+ CHF", nota: "Según cantón y vehículo" },
-  { concepto: "Vigneta autovías", coste: "40 CHF/año", nota: "Obligatoria en autopistas" },
+  { concepto: "Inspeccion MFK", coste: "80-150 CHF", nota: "Unica vez al importar" },
+  { concepto: "Tasas de matriculacion", coste: "60-120 CHF", nota: "Varia por canton" },
+  { concepto: "Placas de matricula", coste: "30-50 CHF", nota: "Precio estandar" },
+  { concepto: "Seguro RC anual (basico)", coste: "500-900 CHF", nota: "Segun conductor y coche" },
+  { concepto: "Impuesto de circulacion anual", coste: "100-1.000+ CHF", nota: "Segun canton y vehiculo" },
+  { concepto: "Vigneta autopistas", coste: "40 CHF/ano", nota: "Obligatoria en autopistas" },
 ];
 
-// ✅ Solo queda @cochesensuiza — eliminado @swissrus_ch
 const CANALES_TELEGRAM = [
   {
     nombre: "Coches en Suiza",
@@ -55,33 +54,33 @@ const CANALES_TELEGRAM = [
 const CONSEJOS = [
   {
     icon: "🔍",
-    titulo: "Dónde comprar coche en Suiza",
-    desc: "Los portales más usados son tutti.ch, AutoScout24.ch y mobile.ch. Para coches de segunda mano entre particulares, el canal de Telegram @cochesensuiza tiene ofertas diarias.",
+    titulo: "Donde comprar coche en Suiza",
+    desc: "Los portales mas usados son tutti.ch, AutoScout24.ch y mobile.ch. Para coches de segunda mano entre particulares, el canal de Telegram @cochesensuiza tiene ofertas diarias.",
   },
   {
     icon: "📋",
-    titulo: "Traer tu coche desde España",
-    desc: "Si el coche lleva más de 6 meses a tu nombre antes de emigrar, puedes importarlo sin pagar IVA suizo (franquicia de mudanza). Tienes hasta 2 años desde tu llegada para solicitarlo.",
+    titulo: "Traer tu coche desde Espana",
+    desc: "Si el coche lleva mas de 6 meses a tu nombre antes de emigrar, puedes importarlo sin pagar IVA suizo (franquicia de mudanza). Tienes hasta 2 anos desde tu llegada para solicitarlo.",
   },
   {
     icon: "🔄",
     titulo: "Placas personalizadas o transferibles",
-    desc: "En la mayoría de cantones las placas van a la persona, no al coche. Si vendes el vehículo, te quedas con las placas. En Zúrich y algunos otros cantones, puedes reservar tu matrícula.",
+    desc: "En la mayoria de cantones las placas van a la persona, no al coche. Si vendes el vehiculo, te quedas con las placas. En Zurich y algunos otros cantones, puedes reservar tu matricula.",
   },
   {
     icon: "⚡",
-    titulo: "Coches eléctricos e híbridos",
-    desc: "Varios cantones ofrecen descuentos en el impuesto de circulación para vehículos eléctricos e híbridos enchufables. En Ginebra y Vaud los descuentos son especialmente generosos.",
+    titulo: "Coches electricos e hibridos",
+    desc: "Varios cantones ofrecen descuentos en el impuesto de circulacion para vehiculos electricos e hibridos enchufables. En Ginebra y Vaud los descuentos son especialmente generosos.",
   },
   {
     icon: "🅿️",
     titulo: "Aparcamiento en ciudades",
-    desc: "Las zonas azules requieren un disco de aparcamiento (disponible en gasolineras y kioscos). En ciudades grandes, los abonos anuales en parkings públicos cuestan 150–400 CHF/mes.",
+    desc: "Las zonas azules requieren un disco de aparcamiento (disponible en gasolineras y kioscos). En ciudades grandes, los abonos anuales en parkings publicos cuestan 150-400 CHF/mes.",
   },
   {
     icon: "❄️",
-    titulo: "Neumáticos de invierno",
-    desc: "No son obligatorios por ley, pero sí recomendados. Si tienes un accidente sin neumáticos de invierno en condiciones de nieve, el seguro puede reducir la cobertura. Temporada habitual: octubre–abril.",
+    titulo: "Neumaticos de invierno",
+    desc: "No son obligatorios por ley, pero si recomendados. Si tienes un accidente sin neumaticos de invierno en condiciones de nieve, el seguro puede reducir la cobertura. Temporada habitual: octubre-abril.",
   },
 ];
 
@@ -112,15 +111,14 @@ function AdBanner({ variant = "horizontal" }) {
         padding: "1.5rem",
         textAlign: "center",
         marginBottom: 32,
-        position: "relative",
       }}>
         <div style={{ fontSize: 10, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, fontFamily: "'Segoe UI', sans-serif" }}>
           Publicidad
         </div>
         <div style={{ fontSize: 15, color: "#999", fontFamily: "'Segoe UI', sans-serif" }}>
-          ¿Tu empresa quiere llegar a españoles en Suiza?<br />
+          Tu empresa quiere llegar a espanoles en Suiza?{" "}
           <a href="mailto:hola@swissrus.ch" style={{ color: "#c0392b", textDecoration: "none", fontWeight: 600 }}>
-            Anúnciate aquí →
+            Anunciate aqui
           </a>
         </div>
       </div>
@@ -145,10 +143,10 @@ function AdBanner({ variant = "horizontal" }) {
       </div>
       <div style={{ flex: 1, minWidth: 180 }}>
         <div style={{ fontSize: 14, fontWeight: 700, color: "#111", fontFamily: "Georgia, serif", marginBottom: 2 }}>
-          ¿Compras o vendes un coche en Suiza?
+          Compras o vendes un coche en Suiza?
         </div>
         <div style={{ fontSize: 12, color: "#888", fontFamily: "'Segoe UI', sans-serif" }}>
-          Publica tu anuncio en @cochesensuiza — gratis para particulares
+          Publica tu anuncio en @cochesensuiza, gratis para particulares
         </div>
       </div>
       
@@ -161,7 +159,7 @@ function AdBanner({ variant = "horizontal" }) {
           fontFamily: "'Segoe UI', sans-serif", whiteSpace: "nowrap", flexShrink: 0,
         }}
       >
-        Ver anuncios →
+        Ver anuncios
       </a>
     </div>
   );
@@ -172,7 +170,6 @@ export default function Coches() {
 
   return (
     <div style={s.page}>
-      {/* HERO */}
       <div style={s.hero}>
         <div style={s.heroInner}>
           <div style={s.eyebrow}>Movilidad en Suiza</div>
@@ -185,11 +182,10 @@ export default function Coches() {
         </div>
       </div>
 
-      {/* CANAL TELEGRAM — solo cochesensuiza */}
       <div style={s.section}>
         <div style={s.secEyebrow}>Comunidad</div>
         <h2 style={s.secTitle}>Canal de <em style={s.secTitleEm}>Telegram</em></h2>
-        <p style={s.secSub}>Únete a la comunidad. Ofertas, consejos y novedades directamente en tu móvil.</p>
+        <p style={s.secSub}>Unete a la comunidad. Ofertas, consejos y novedades directamente en tu movil.</p>
 
         <div style={{ marginBottom: 32 }}>
           {CANALES_TELEGRAM.map((canal) => (
@@ -252,11 +248,10 @@ export default function Coches() {
 
       <div style={s.divider}><hr style={s.dividerLine} /></div>
 
-      {/* PASOS MATRICULACIÓN */}
       <div style={s.section}>
         <div style={s.secEyebrow}>Proceso paso a paso</div>
         <h2 style={s.secTitle}>Importar o matricular <em style={s.secTitleEm}>tu coche</em></h2>
-        <p style={s.secSub}>Si traes un coche desde España o lo compras de segunda mano, estos son los pasos para matricularlo en Suiza.</p>
+        <p style={s.secSub}>Si traes un coche desde Espana o lo compras de segunda mano, estos son los pasos para matricularlo en Suiza.</p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 0, border: "1px solid rgba(0,0,0,0.09)", background: "white" }}>
           {PASOS_MATRICULACION.map((paso, i) => (
@@ -272,16 +267,13 @@ export default function Coches() {
               onClick={() => setOpenPaso(openPaso === i ? null : i)}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                <div style={{
-                  fontFamily: "Georgia, serif", fontSize: 11, fontWeight: 900,
-                  color: "#c0392b", letterSpacing: "0.05em", flexShrink: 0,
-                }}>
+                <div style={{ fontFamily: "Georgia, serif", fontSize: 11, fontWeight: 900, color: "#c0392b", letterSpacing: "0.05em", flexShrink: 0 }}>
                   {paso.num}
                 </div>
                 <div style={{ fontFamily: "Georgia, serif", fontSize: 16, fontWeight: 700, color: "#111", flex: 1 }}>
                   {paso.titulo}
                 </div>
-                <div style={{ fontSize: 12, color: "#bbb", transition: "transform 0.2s", transform: openPaso === i ? "rotate(180deg)" : "none" }}>▼</div>
+                <div style={{ fontSize: 12, color: "#bbb", transition: "transform 0.2s", transform: openPaso === i ? "rotate(180deg)" : "none" }}>v</div>
               </div>
               {openPaso === i && (
                 <p style={{ margin: "1rem 0 0 2.5rem", fontSize: 14, color: "#555", fontFamily: "'Segoe UI', sans-serif", lineHeight: 1.7 }}>
@@ -295,11 +287,10 @@ export default function Coches() {
 
       <div style={s.divider}><hr style={s.dividerLine} /></div>
 
-      {/* DOCUMENTACIÓN */}
       <div style={s.section}>
-        <div style={s.secEyebrow}>Documentación</div>
-        <h2 style={s.secTitle}>Qué necesitas <em style={s.secTitleEm}>llevar</em></h2>
-        <p style={s.secSub}>Para registrar un vehículo importado en la oficina de tráfico cantonal.</p>
+        <div style={s.secEyebrow}>Documentacion</div>
+        <h2 style={s.secTitle}>Que necesitas <em style={s.secTitleEm}>llevar</em></h2>
+        <p style={s.secSub}>Para registrar un vehiculo importado en la oficina de trafico cantonal.</p>
 
         <div style={{ background: "white", border: "1px solid rgba(0,0,0,0.09)", padding: "1.6rem 2rem" }}>
           {DOCS_IMPORTACION.map((doc, i) => (
@@ -308,7 +299,7 @@ export default function Coches() {
               padding: "0.8rem 0",
               borderBottom: i < DOCS_IMPORTACION.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
             }}>
-              <span style={{ color: "#c0392b", fontSize: 14, marginTop: 2, flexShrink: 0 }}>✓</span>
+              <span style={{ color: "#c0392b", fontSize: 14, marginTop: 2, flexShrink: 0 }}>+</span>
               <span style={{ fontSize: 14, color: "#444", fontFamily: "'Segoe UI', sans-serif", lineHeight: 1.5 }}>{doc}</span>
             </div>
           ))}
@@ -321,11 +312,10 @@ export default function Coches() {
 
       <div style={s.divider}><hr style={s.dividerLine} /></div>
 
-      {/* COSTES */}
       <div style={s.section}>
         <div style={s.secEyebrow}>Presupuesto</div>
-        <h2 style={s.secTitle}>Costes de <em style={s.secTitleEm}>matriculación</em></h2>
-        <p style={s.secSub}>Estimación orientativa. Los precios varían entre cantones.</p>
+        <h2 style={s.secTitle}>Costes de <em style={s.secTitleEm}>matriculacion</em></h2>
+        <p style={s.secSub}>Estimacion orientativa. Los precios varian entre cantones.</p>
 
         <div style={{ border: "1px solid rgba(0,0,0,0.09)", background: "white" }}>
           {COSTES.map((c, i) => (
@@ -349,10 +339,9 @@ export default function Coches() {
 
       <div style={s.divider}><hr style={s.dividerLine} /></div>
 
-      {/* CONSEJOS */}
       <div style={s.section}>
-        <div style={s.secEyebrow}>Guía práctica</div>
-        <h2 style={s.secTitle}>Consejos <em style={s.secTitleEm}>útiles</em></h2>
+        <div style={s.secEyebrow}>Guia practica</div>
+        <h2 style={s.secTitle}>Consejos <em style={s.secTitleEm}>utiles</em></h2>
         <p style={s.secSub}>Lo que nadie te cuenta sobre tener coche en Suiza.</p>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
