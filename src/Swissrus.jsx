@@ -1,305 +1,370 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const ERRORES = [
-  { icon: "❌", titulo: "Aceptar trabajos mal pagados", desc: "Sin saber los salarios reales, muchos aceptan 20-30% menos de lo que merecen" },
-  { icon: "❌", titulo: "Pagar alquileres desorbitados", desc: "Sin conocer el mercado, pierdes miles de CHF en el primer año" },
-  { icon: "❌", titulo: "Comprar coches sin saber el mercado", desc: "Los precios en Suiza tienen trampa. La mayoría cae en el mismo error" },
+const PASOS_MATRICULACION = [
+  {
+    num: "01",
+    titulo: "Inspección técnica (MFK)",
+    desc: "Todo vehículo importado debe pasar la inspección técnica cantonal (MFK). Lleva el coche al centro de inspección de tu cantón. Coste: 80–150 CHF según cantón.",
+  },
+  {
+    num: "02",
+    titulo: "Seguro obligatorio",
+    desc: "Antes de matricular, necesitas contratar un seguro de responsabilidad civil (RC) con una aseguradora suiza. Es imprescindible para obtener las placas.",
+  },
+  {
+    num: "03",
+    titulo: "Registro en la Oficina de Tráfico cantonal",
+    desc: "Acude a la Strassenverkehrsamt (o Service des automobiles) de tu cantón con toda la documentación. Recibirás las placas suizas y el permiso de circulación.",
+  },
+  {
+    num: "04",
+    titulo: "Pago del impuesto de circulación",
+    desc: "Cada cantón cobra un impuesto anual basado en el peso, cilindrada o potencia. Va de 100 CHF a más de 1.000 CHF al año.",
+  },
 ];
 
-const AREAS = [
-  { icon: "📋", title: "Permisos de residencia", desc: "B, C, G y L explicados de forma clara.", page: "permisos" },
-  { icon: "💼", title: "Empleo", desc: "Salarios, contratos y el 13.º mes", page: "salarios" },
-  { icon: "🏠", title: "Vivienda", desc: "Cómo buscar piso y entender el contrato", page: null },
-  { icon: "🚗", title: "Coches", desc: "Comprar, matricular o traer tu coche", page: "coches" },
-  { icon: "⚕️", title: "Sanidad", desc: "LAMal, franquicia y cómo ir al médico", page: "sanidad" },
-  { icon: "🧮", title: "Calculadora", desc: "26 cantones · Quellensteuer · BVG", page: "calculadora" },
-  { icon: "📊", title: "Impuestos", desc: "Quellensteuer, IRPF y declaración", page: null },
-  { icon: "🏛️", title: "Pensiones", desc: "Los 3 pilares y recuperar el 2.º", page: "pensiones" },
-  { icon: "✈️", title: "Vuelta a España", desc: "Baja consular y trámites al volver", page: null },
+const DOCS_IMPORTACION = [
+  "Título de propiedad (ficha técnica española o título de circulación)",
+  "Pasaporte o DNI + permiso de residencia suizo",
+  "Prueba del seguro RC suizo",
+  "Factura de compra o prueba de pago de IVA en origen",
+  "Certificado de conformidad europeo (CoC) si disponible",
 ];
 
-const STATS = [
-  { num: "+100.000", label: "personas interesadas en vivir en Suiza" },
-  { num: "26", label: "cantones con info actualizada 2026" },
-  { num: "6-8k", label: "CHF salario medio mensual" },
+const COSTES = [
+  { concepto: "Inspección MFK", coste: "80–150 CHF", nota: "Única vez al importar" },
+  { concepto: "Tasas de matriculación", coste: "60–120 CHF", nota: "Varía por cantón" },
+  { concepto: "Placas de matrícula", coste: "30–50 CHF", nota: "Precio estándar" },
+  { concepto: "Seguro RC anual (básico)", coste: "500–900 CHF", nota: "Según conductor y coche" },
+  { concepto: "Impuesto de circulación anual", coste: "100–1.000+ CHF", nota: "Según cantón y vehículo" },
+  { concepto: "Vigneta autovías", coste: "40 CHF/año", nota: "Obligatoria en autopistas" },
 ];
 
-export default function Swissrus({ onNavigate }) {
-  const [visible, setVisible] = useState(false);
+const CANALES_TELEGRAM = [
+  {
+    nombre: "Coches en Suiza",
+    handle: "@cochesensuiza",
+    url: "https://t.me/cochesensuiza",
+    desc: "Compraventa de coches entre particulares en Suiza. Ofertas diarias, precios reales y sin intermediarios.",
+    emoji: "🚗",
+    color: "#c0392b",
+  },
+];
 
-  useEffect(() => {
-    setTimeout(() => setVisible(true), 100);
-  }, []);
+const CONSEJOS = [
+  {
+    icon: "🔍",
+    titulo: "Dónde comprar coche en Suiza",
+    desc: "Los portales más usados son tutti.ch, AutoScout24.ch y mobile.ch. Para coches de segunda mano entre particulares, el canal de Telegram @cochesensuiza tiene ofertas diarias.",
+  },
+  {
+    icon: "📋",
+    titulo: "Traer tu coche desde España",
+    desc: "Si el coche lleva más de 6 meses a tu nombre antes de emigrar, puedes importarlo sin pagar IVA suizo (franquicia de mudanza). Tienes hasta 2 años desde tu llegada para solicitarlo.",
+  },
+  {
+    icon: "🔄",
+    titulo: "Placas personalizadas o transferibles",
+    desc: "En la mayoría de cantones las placas van a la persona, no al coche. Si vendes el vehículo, te quedas con las placas. En Zúrich y algunos otros cantones, puedes reservar tu matrícula.",
+  },
+  {
+    icon: "⚡",
+    titulo: "Coches eléctricos e híbridos",
+    desc: "Varios cantones ofrecen descuentos en el impuesto de circulación para vehículos eléctricos e híbridos enchufables. En Ginebra y Vaud los descuentos son especialmente generosos.",
+  },
+  {
+    icon: "🅿️",
+    titulo: "Aparcamiento en ciudades",
+    desc: "Las zonas azules requieren un disco de aparcamiento (disponible en gasolineras y kioscos). En ciudades grandes, los abonos anuales en parkings públicos cuestan 150–400 CHF/mes.",
+  },
+  {
+    icon: "❄️",
+    titulo: "Neumáticos de invierno",
+    desc: "No son obligatorios por ley, pero sí recomendados. Si tienes un accidente sin neumáticos de invierno en condiciones de nieve, el seguro puede reducir la cobertura. Temporada habitual: octubre–abril.",
+  },
+];
+
+const s = {
+  page: { fontFamily: "'Georgia', 'Times New Roman', serif", background: "#faf9f7", minHeight: "100vh" },
+  hero: { background: "linear-gradient(135deg, #111 0%, #1a1a2e 100%)", color: "white", padding: "5rem 2rem 4rem" },
+  heroInner: { maxWidth: 900, margin: "0 auto" },
+  eyebrow: { fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#c0392b", marginBottom: 12, fontFamily: "'Segoe UI', sans-serif" },
+  heroTitle: { fontSize: "clamp(2.2rem, 5vw, 3.5rem)", fontWeight: 900, lineHeight: 1.1, marginBottom: 16, letterSpacing: "-0.02em" },
+  heroTitleEm: { color: "#c0392b", fontStyle: "italic" },
+  heroSub: { fontSize: 16, color: "#aaa", lineHeight: 1.7, maxWidth: 600, fontFamily: "'Segoe UI', sans-serif", fontWeight: 300 },
+  section: { maxWidth: 900, margin: "0 auto", padding: "4rem 2rem" },
+  secEyebrow: { fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#c0392b", marginBottom: 8, fontFamily: "'Segoe UI', sans-serif" },
+  secTitle: { fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 900, marginBottom: 8, letterSpacing: "-0.02em", color: "#111" },
+  secTitleEm: { color: "#c0392b", fontStyle: "italic" },
+  secSub: { fontSize: 14, color: "#888", marginBottom: 36, fontFamily: "'Segoe UI', sans-serif", lineHeight: 1.6 },
+  divider: { maxWidth: 900, margin: "0 auto", padding: "0 2rem" },
+  dividerLine: { border: "none", borderTop: "1px solid rgba(0,0,0,0.1)" },
+};
+
+function AdBanner({ variant = "horizontal" }) {
+  if (variant === "box") {
+    return (
+      <div style={{
+        border: "1px dashed #ddd",
+        background: "#fdf9f8",
+        borderRadius: 4,
+        padding: "1.5rem",
+        textAlign: "center",
+        marginBottom: 32,
+      }}>
+        <div style={{ fontSize: 10, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, fontFamily: "'Segoe UI', sans-serif" }}>
+          Publicidad
+        </div>
+        <div style={{ fontSize: 15, color: "#999", fontFamily: "'Segoe UI', sans-serif" }}>
+          Tu empresa quiere llegar a espanoles en Suiza?{" "}
+          <a href="mailto:hola@swissrus.ch" style={{ color: "#c0392b", textDecoration: "none", fontWeight: 600 }}>
+            Anunciate aqui
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div style={{ fontFamily: "'Segoe UI', Arial, sans-serif", background: "#0a0a0a", color: "white", minHeight: "100vh" }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        .hero-bg { position: relative; min-height: 100vh; background: linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%); overflow: hidden; display: flex; align-items: center; }
-        .hero-bg::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=80') center/cover; opacity: 0.55; z-index: 0; }
-        .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.95) 40%, rgba(10,10,10,0.4) 100%); z-index: 1; }
-        .hero-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 6rem 2rem 4rem; width: 100%; }
-        .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.5); padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1.5rem; }
-        .hero-title { font-family: 'Oswald', sans-serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; text-transform: uppercase; }
-        .hero-title .accent { color: #e74c3c; display: block; }
-        .hero-sub { font-size: 1.1rem; color: #aaa; line-height: 1.7; max-width: 480px; margin-bottom: 2.5rem; font-weight: 300; }
-        .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 3rem; }
-        .btn-red { background: #c0392b; color: white; padding: 1rem 2rem; font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
-        .btn-red:hover { background: #a93226; transform: translateY(-2px); }
-        .btn-dark { background: rgba(255,255,255,0.08); color: white; padding: 1rem 2rem; font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
-        .btn-dark:hover { background: rgba(255,255,255,0.15); }
-        .stats-bar { display: flex; gap: 2rem; flex-wrap: wrap; }
-        .stat-num { font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 700; color: #e74c3c; line-height: 1; }
-        .stat-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; max-width: 120px; line-height: 1.3; }
-        .errores-section { background: white; color: #111; padding: 5rem 2rem; }
-        .errores-inner { max-width: 1100px; margin: 0 auto; }
-        .section-badge { display: inline-flex; align-items: center; gap: 8px; background: #fdf0ef; border: 1px solid #e74c3c; padding: 5px 12px; border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1.2rem; }
-        .section-title { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; text-transform: uppercase; line-height: 1.1; margin-bottom: 0.8rem; color: #111; }
-        .section-title .accent { color: #e74c3c; }
-        .section-sub { font-size: 1rem; color: #777; margin-bottom: 3rem; max-width: 600px; }
-        .errores-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
-        .error-card { border: 2px solid #f5f5f5; padding: 1.8rem; border-radius: 4px; transition: border-color 0.2s; }
-        .error-card:hover { border-color: #e74c3c; }
-        .error-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
-        .error-titulo { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; color: #111; margin-bottom: 0.5rem; text-transform: uppercase; }
-        .error-desc { font-size: 0.88rem; color: #888; line-height: 1.6; }
-        .leadmagnet { background: linear-gradient(135deg, #1a0505 0%, #c0392b 100%); padding: 4rem 2rem; position: relative; overflow: hidden; }
-        .leadmagnet-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
-        .leadmagnet-book { background: white; padding: 2rem 1.5rem; border-radius: 8px; text-align: center; max-width: 240px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); transform: rotate(-3deg); }
-        .book-emoji { font-size: 3rem; margin-bottom: 0.8rem; }
-        .book-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: #111; font-weight: 700; text-transform: uppercase; line-height: 1.3; margin-bottom: 0.5rem; }
-        .book-subtitle { font-size: 0.8rem; color: #c0392b; font-weight: 600; }
-        .coches-section { background: #0f0f0f; padding: 5rem 2rem; }
-        .coches-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .coches-img { position: relative; border-radius: 4px; overflow: hidden; aspect-ratio: 4/3; }
-        .coches-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); }
-        .areas-section { background: #111; padding: 5rem 2rem; }
-        .areas-inner { max-width: 1100px; margin: 0 auto; }
-        .areas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05); margin-top: 2.5rem; }
-        .area-card { background: #111; padding: 1.8rem; cursor: pointer; transition: background 0.2s; border-bottom: 2px solid transparent; }
-        .area-card:hover { background: #1a1a1a; border-bottom-color: #e74c3c; }
-        .area-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
-        .area-title { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; text-transform: uppercase; color: white; margin-bottom: 0.3rem; letter-spacing: 0.03em; }
-        .area-desc { font-size: 0.82rem; color: #666; line-height: 1.5; }
-        .final-cta { background: #0f0f0f; padding: 6rem 2rem; position: relative; overflow: hidden; }
-        .final-cta::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1400&q=80') center/cover; opacity: 0.08; }
-        .final-cta-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .cta-left { }
-        .cta-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1rem; }
-        .cta-title { font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; text-transform: uppercase; line-height: 1.1; margin-bottom: 1rem; }
-        .cta-title .red { color: #e74c3c; }
-        .cta-desc { font-size: 1rem; color: #888; line-height: 1.7; margin-bottom: 2rem; max-width: 420px; }
-        .cta-stats { display: flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
-        .cta-stat-num { font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; color: #e74c3c; line-height: 1; }
-        .cta-stat-label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
-        .coches-card-link { display: block; text-decoration: none; color: inherit; border-radius: 12px; overflow: hidden; background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 50%, #1a0a0a 100%); border: 1px solid rgba(192,57,43,0.4); transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 8px 32px rgba(0,0,0,0.6); }
-        .coches-card-link:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(192,57,43,0.25); border-color: rgba(192,57,43,0.8); }
-        .coches-card-img { width: 100%; height: 200px; object-fit: cover; opacity: 0.6; display: block; }
-        .coches-card-body { padding: 1.6rem 1.8rem 1.8rem; }
-        .coches-card-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.4); padding: 4px 10px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #e74c3c; margin-bottom: 1rem; }
-        .coches-card-title { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; text-transform: uppercase; color: white; line-height: 1.1; margin-bottom: 4px; }
-        .coches-card-handle { font-size: 13px; color: #e74c3c; font-weight: 700; margin-bottom: 0.8rem; }
-        .coches-card-desc { font-size: 13px; color: #777; line-height: 1.6; margin-bottom: 1.2rem; }
-        .coches-card-footer { display: flex; align-items: center; justify-content: space-between; }
-        .coches-card-cta { background: #c0392b; color: white; padding: 10px 18px; font-family: 'Oswald', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 4px; }
-        .coches-card-sub { font-size: 11px; color: #444; text-transform: uppercase; letter-spacing: 0.06em; }
-        .ad-banner { background: #f8f8f8; border-top: 3px solid #e74c3c; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-        footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); padding: 2rem; text-align: center; }
-        @media (max-width: 768px) {
-          .errores-grid { grid-template-columns: 1fr; }
-          .leadmagnet-inner { grid-template-columns: 1fr; }
-          .coches-inner { grid-template-columns: 1fr; }
-          .areas-grid { grid-template-columns: repeat(2, 1fr); }
-          .hero-btns { flex-direction: column; }
-          .leadmagnet-book { display: none; }
-          .final-cta-inner { grid-template-columns: 1fr; }
-        }
-      `}</style>
+    <div style={{
+      border: "1px solid #e8e4e0",
+      background: "linear-gradient(135deg, #fff 0%, #fdf9f8 100%)",
+      borderRadius: 4,
+      padding: "1.2rem 1.5rem",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 16,
+      margin: "2rem 0",
+      flexWrap: "wrap",
+    }}>
+      <div style={{ fontSize: 10, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Segoe UI', sans-serif", flexShrink: 0 }}>
+        Pub
+      </div>
+      <div style={{ flex: 1, minWidth: 180 }}>
+        <div style={{ fontSize: 14, fontWeight: 700, color: "#111", fontFamily: "Georgia, serif", marginBottom: 2 }}>
+          Compras o vendes un coche en Suiza?
+        </div>
+        <div style={{ fontSize: 12, color: "#888", fontFamily: "'Segoe UI', sans-serif" }}>
+          Publica tu anuncio en @cochesensuiza, gratis para particulares
+        </div>
+      </div>
+      
+        href="https://t.me/cochesensuiza"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          background: "#c0392b", color: "white", padding: "0.5rem 1.2rem",
+          borderRadius: 2, fontSize: 12, fontWeight: 700, textDecoration: "none",
+          fontFamily: "'Segoe UI', sans-serif", whiteSpace: "nowrap", flexShrink: 0,
+        }}
+      >
+        Ver anuncios
+      </a>
+    </div>
+  );
+}
 
-      <div className="hero-bg">
-        <div className="hero-content">
-          <div className="badge">🇨🇭 Informacion actualizada 2026</div>
-          <h1 className="hero-title" style={{ opacity: visible ? 1 : 0, transform: visible ? "none" : "translateY(30px)", transition: "all 0.8s ease" }}>
-            Antes de venir<br />a Suiza, lee esto
-            <span className="accent">Te puede ahorrar<br />miles de euros</span>
+export default function Coches() {
+  const [openPaso, setOpenPaso] = useState(null);
+
+  return (
+    <div style={s.page}>
+      <div style={s.hero}>
+        <div style={s.heroInner}>
+          <div style={s.eyebrow}>Movilidad en Suiza</div>
+          <h1 style={s.heroTitle}>
+            Coches en <em style={s.heroTitleEm}>Suiza</em>
           </h1>
-          <p className="hero-sub" style={{ opacity: visible ? 1 : 0, transition: "all 0.8s ease 0.2s" }}>
-            Trabajo, vivienda, permisos y errores reales que nadie te cuenta. Guia gratuita para hispanohablantes.
+          <p style={s.heroSub}>
+            Comprar, importar o matricular tu coche. Todo lo que necesitas saber sin perder tiempo en burocracia innecesaria.
           </p>
-          <div className="hero-btns" style={{ opacity: visible ? 1 : 0, transition: "all 0.8s ease 0.4s" }}>
-            <button className="btn-red" onClick={() => onNavigate && onNavigate("permisos")}>VER GUIA GRATIS</button>
-            <button className="btn-dark" onClick={() => onNavigate && onNavigate("calculadora")}>CALCULA CUANTO GANARAS EN SUIZA</button>
-          </div>
-          <div className="stats-bar" style={{ opacity: visible ? 1 : 0, transition: "all 0.8s ease 0.6s" }}>
-            {STATS.map((s, i) => (
-              <div key={i}>
-                <div className="stat-num">{s.num}</div>
-                <div className="stat-label">{s.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
-      <div style={{ background: "#e74c3c", padding: "0.8rem 2rem", textAlign: "center" }}>
-        <span style={{ fontFamily: "'Oswald', sans-serif", fontSize: 14, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-          ⭐ +100.000 personas interesadas en vivir en Suiza &nbsp;|&nbsp; 🇨🇭 Informacion actualizada 2026
-        </span>
-      </div>
+      <div style={s.section}>
+        <div style={s.secEyebrow}>Comunidad</div>
+        <h2 style={s.secTitle}>Canal de <em style={s.secTitleEm}>Telegram</em></h2>
+        <p style={s.secSub}>Unete a la comunidad. Ofertas, consejos y novedades directamente en tu movil.</p>
 
-      <div className="errores-section">
-        <div className="errores-inner">
-          <div className="section-badge">⚠️ Atencion</div>
-          <h2 className="section-title">La mayoria <span className="accent">pierde dinero</span><br />al llegar a Suiza</h2>
-          <p className="section-sub">Sin la informacion correcta, los primeros meses en Suiza pueden costarte mucho mas de lo necesario.</p>
-          <div className="errores-grid">
-            {ERRORES.map((e, i) => (
-              <div key={i} className="error-card">
-                <div className="error-icon">{e.icon}</div>
-                <div className="error-titulo">{e.titulo}</div>
-                <div className="error-desc">{e.desc}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <button className="btn-red" onClick={() => onNavigate && onNavigate("permisos")} style={{ borderRadius: 4 }}>
-              EVITA ESTOS ERRORES CON INFORMACION REAL
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="leadmagnet">
-        <div className="leadmagnet-inner">
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <div className="leadmagnet-book">
-              <div className="book-emoji">📋</div>
-              <div className="book-title">7 errores que te pueden hacer perder mas de 3.000 CHF en Suiza</div>
-              <div className="book-subtitle">GUIA GRATUITA 2026</div>
-            </div>
-          </div>
-          <div>
-            <div className="section-badge" style={{ background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.3)", color: "white" }}>✉️ Descarga gratis</div>
-            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.1, marginBottom: "1rem", color: "white" }}>
-              7 errores que te pueden hacer perder mas de
-              <span style={{ color: "#ffd700", display: "block" }}>3.000 CHF en Suiza</span>
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.7)", marginBottom: "2rem", fontSize: "0.95rem", lineHeight: 1.7 }}>
-              La guia completa para hispanohablantes. Gratuita. Sin spam.
-            </p>
-            <button className="btn-red" onClick={() => onNavigate && onNavigate("permisos")} style={{ borderRadius: 4 }}>
-              VER GUIA GRATIS →
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="coches-section">
-        <div className="coches-inner">
-          <div>
-            <div className="section-badge" style={{ background: "rgba(192,57,43,0.15)", borderColor: "rgba(192,57,43,0.4)", color: "#e74c3c" }}>🚗 Coches reales en Suiza</div>
-            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.8rem)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.1, marginBottom: "1rem", color: "white" }}>
-              Coches <span style={{ color: "#e74c3c" }}>reales</span> en Suiza<br />(sin humo)
-            </h2>
-            <p style={{ color: "#888", fontSize: "1rem", lineHeight: 1.7, marginBottom: "2rem" }}>Analizamos coches, precios reales y te decimos si vale la pena o no. Evita comprar mal y perder dinero.</p>
-            <button className="btn-red" onClick={() => onNavigate && onNavigate("coches")}>VER COCHES DISPONIBLES</button>
-            <div style={{ marginTop: "1.5rem" }}>
-              <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" style={{ color: "#e74c3c", textDecoration: "none", fontSize: 13, fontWeight: 600 }}>📲 @cochesensuiza en Telegram</a>
-            </div>
-          </div>
-          <div className="coches-img">
-            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80" alt="Coche" />
-          </div>
-        </div>
-      </div>
-
-      <div className="ad-banner">
-        <div style={{ fontSize: 9, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.12em" }}>Publicidad</div>
-        <div style={{ flex: 1, minWidth: 200 }}>
-          <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 15, fontWeight: 700, color: "#111", textTransform: "uppercase" }}>Tu empresa trabaja con hispanohablantes en Suiza?</div>
-          <div style={{ fontSize: 12, color: "#999" }}>Gestoria, seguros, mudanzas — llega a miles de lectores</div>
-        </div>
-        <a href="mailto:hola@swissrus.ch" style={{ background: "#c0392b", color: "white", padding: "0.6rem 1.4rem", fontSize: 12, fontWeight: 700, textDecoration: "none", textTransform: "uppercase" }}>ANUNCIATE</a>
-      </div>
-
-      <div className="areas-section">
-        <div className="areas-inner">
-          <div className="section-badge" style={{ background: "rgba(192,57,43,0.15)", borderColor: "rgba(192,57,43,0.4)", color: "#e74c3c" }}>📚 Guias completas</div>
-          <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.1, color: "white" }}>
-            Todo lo que necesitas saber<br /><span style={{ color: "#e74c3c" }}>antes de llegar</span>
-          </h2>
-          <div className="areas-grid">
-            {AREAS.map((a) => (
-              <div key={a.title} className="area-card" onClick={() => { if (a.page && onNavigate) onNavigate(a.page); }}>
-                <div className="area-icon">{a.icon}</div>
-                <div className="area-title">{a.title}</div>
-                <div className="area-desc">{a.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* SECCIÓN FINAL — Canal de coches profesional */}
-      <div className="final-cta">
-        <div className="final-cta-inner">
-          <div className="cta-left">
-            <div className="cta-eyebrow">🚗 Canal de Telegram</div>
-            <h2 className="cta-title">
-              Coches en Suiza<br />
-              <span className="red">sin intermediarios</span>
-            </h2>
-            <p className="cta-desc">
-              El canal de referencia para comprar y vender coches entre particulares en Suiza. Ofertas diarias, precios reales, sin comisiones y en español.
-            </p>
-            <div className="cta-stats">
-              <div>
-                <div className="cta-stat-num">Diario</div>
-                <div className="cta-stat-label">Nuevas ofertas</div>
-              </div>
-              <div>
-                <div className="cta-stat-num">0€</div>
-                <div className="cta-stat-label">Sin comisiones</div>
-              </div>
-              <div>
-                <div className="cta-stat-num">🇨🇭</div>
-                <div className="cta-stat-label">Solo en Suiza</div>
-              </div>
-            </div>
-            <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" className="btn-red" style={{ borderRadius: 4 }}>
-              UNIRME A @COCHESENSUIZA →
-            </a>
-          </div>
-          <div>
-            <a href="https://t.me/cochesensuiza" target="_blank" rel="noopener noreferrer" className="coches-card-link">
-              <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80" alt="Coches en Suiza" className="coches-card-img" />
-              <div className="coches-card-body">
-                <div className="coches-card-tag">📲 Canal de Telegram</div>
-                <div className="coches-card-title">Coches en Suiza</div>
-                <div className="coches-card-handle">@cochesensuiza</div>
-                <div className="coches-card-desc">Compraventa de coches entre particulares. Ofertas diarias, precios reales y sin intermediarios.</div>
-                <div className="coches-card-footer">
-                  <span className="coches-card-cta">Unirme al canal →</span>
-                  <span className="coches-card-sub">🚗 Ofertas diarias</span>
+        <div style={{ marginBottom: 32 }}>
+          {CANALES_TELEGRAM.map((canal) => (
+            
+              key={canal.handle}
+              href={canal.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "block",
+                background: "white",
+                border: "1px solid rgba(0,0,0,0.09)",
+                borderRadius: 4,
+                padding: "1.8rem",
+                textDecoration: "none",
+                color: "inherit",
+                transition: "box-shadow 0.2s, transform 0.2s",
+                maxWidth: 480,
+              }}
+              onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={e => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "none"; }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+                <div style={{
+                  width: 48, height: 48, borderRadius: "50%",
+                  background: canal.color, display: "flex", alignItems: "center",
+                  justifyContent: "center", fontSize: 22, flexShrink: 0,
+                }}>
+                  {canal.emoji}
+                </div>
+                <div>
+                  <div style={{ fontFamily: "Georgia, serif", fontSize: 16, fontWeight: 700, color: "#111" }}>
+                    {canal.nombre}
+                  </div>
+                  <div style={{ fontSize: 12, color: canal.color, fontFamily: "'Segoe UI', sans-serif", fontWeight: 600 }}>
+                    {canal.handle}
+                  </div>
                 </div>
               </div>
+              <p style={{ fontSize: 13, color: "#666", fontFamily: "'Segoe UI', sans-serif", lineHeight: 1.6, marginBottom: 16 }}>
+                {canal.desc}
+              </p>
+              <div style={{
+                display: "inline-flex", alignItems: "center", gap: 6,
+                background: canal.color, color: "white",
+                padding: "0.45rem 1rem", borderRadius: 2,
+                fontSize: 12, fontWeight: 700, fontFamily: "'Segoe UI', sans-serif",
+              }}>
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.008 9.456c-.148.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.08 14.514l-2.948-.924c-.64-.203-.654-.64.136-.947l11.527-4.443c.533-.194 1.001.13.767.048z"/>
+                </svg>
+                Unirse al canal
+              </div>
             </a>
-          </div>
+          ))}
+        </div>
+
+        <AdBanner variant="horizontal" />
+      </div>
+
+      <div style={s.divider}><hr style={s.dividerLine} /></div>
+
+      <div style={s.section}>
+        <div style={s.secEyebrow}>Proceso paso a paso</div>
+        <h2 style={s.secTitle}>Importar o matricular <em style={s.secTitleEm}>tu coche</em></h2>
+        <p style={s.secSub}>Si traes un coche desde España o lo compras de segunda mano, estos son los pasos para matricularlo en Suiza.</p>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 0, border: "1px solid rgba(0,0,0,0.09)", background: "white" }}>
+          {PASOS_MATRICULACION.map((paso, i) => (
+            <div
+              key={paso.num}
+              style={{
+                borderBottom: i < PASOS_MATRICULACION.length - 1 ? "1px solid rgba(0,0,0,0.06)" : "none",
+                padding: "1.4rem 1.6rem",
+                cursor: "pointer",
+                background: openPaso === i ? "#fdf3f2" : "white",
+                transition: "background 0.15s",
+              }}
+              onClick={() => setOpenPaso(openPaso === i ? null : i)}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                <div style={{ fontFamily: "Georgia, serif", fontSize: 11, fontWeight: 900, color: "#c0392b", letterSpacing: "0.05em", flexShrink: 0 }}>
+                  {paso.num}
+                </div>
+                <div style={{ fontFamily: "Georgia, serif", fontSize: 16, fontWeight: 700, color: "#111", flex: 1 }}>
+                  {paso.titulo}
+                </div>
+                <div style={{ fontSize: 12, color: "#bbb", transition: "transform 0.2s", transform: openPaso === i ? "rotate(180deg)" : "none" }}>v</div>
+              </div>
+              {openPaso === i && (
+                <p style={{ margin: "1rem 0 0 2.5rem", fontSize: 14, color: "#555", fontFamily: "'Segoe UI', sans-serif", lineHeight: 1.7 }}>
+                  {paso.desc}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
-      <footer>
-        <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1.2rem", fontWeight: 700, marginBottom: "0.8rem", letterSpacing: "0.05em" }}>
-          SWISS<span style={{ color: "#e74c3c" }}>RUS</span>
-        </div>
-        <div style={{ display: "flex", gap: "1.5rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "1rem" }}>
-          {["Permisos", "Salarios", "Sanidad", "Pensiones", "Coches", "Aviso legal"].map(l => (
-            <a key={l} href="#" style={{ fontSize: 12, color: "#555", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.06em" }}>{l}</a>
+      <div style={s.divider}><hr style={s.dividerLine} /></div>
+
+      <div style={s.section}>
+        <div style={s.secEyebrow}>Documentación</div>
+        <h2 style={s.secTitle}>Qué necesitas <em style={s.secTitleEm}>llevar</em></h2>
+        <p style={s.secSub}>Para registrar un vehículo importado en la oficina de tráfico cantonal.</p>
+
+        <div style={{ background: "white", border: "1px solid rgba(0,0,0,0.09)", padding: "1.6rem 2rem" }}>
+          {DOCS_IMPORTACION.map((doc, i) => (
+            <div key={i} style={{
+              display: "flex", gap: 12, alignItems: "flex-start",
+              padding: "0.8rem 0",
+              borderBottom: i < DOCS_IMPORTACION.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
+            }}>
+              <span style={{ color: "#c0392b", fontSize: 14, marginTop: 2, flexShrink: 0 }}>✓</span>
+              <span style={{ fontSize: 14, color: "#444", fontFamily: "'Segoe UI', sans-serif", lineHeight: 1.5 }}>{doc}</span>
+            </div>
           ))}
         </div>
-        <p style={{ fontSize: 11, color: "#333" }}>2025-2026 Swissrus · Informacion orientativa · Hecho con ❤️ para hispanohablantes en Suiza</p>
-      </footer>
+
+        <div style={{ marginTop: 32 }}>
+          <AdBanner variant="box" />
+        </div>
+      </div>
+
+      <div style={s.divider}><hr style={s.dividerLine} /></div>
+
+      <div style={s.section}>
+        <div style={s.secEyebrow}>Presupuesto</div>
+        <h2 style={s.secTitle}>Costes de <em style={s.secTitleEm}>matriculación</em></h2>
+        <p style={s.secSub}>Estimación orientativa. Los precios varían entre cantones.</p>
+
+        <div style={{ border: "1px solid rgba(0,0,0,0.09)", background: "white" }}>
+          {COSTES.map((c, i) => (
+            <div key={i} style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              padding: "1.2rem 1.6rem", gap: 16, flexWrap: "wrap",
+              borderBottom: i < COSTES.length - 1 ? "1px solid rgba(0,0,0,0.06)" : "none",
+              background: i % 2 === 0 ? "white" : "#fdfcfb",
+            }}>
+              <div>
+                <div style={{ fontFamily: "Georgia, serif", fontSize: 15, fontWeight: 700, color: "#111" }}>{c.concepto}</div>
+                <div style={{ fontSize: 12, color: "#aaa", fontFamily: "'Segoe UI', sans-serif", marginTop: 2 }}>{c.nota}</div>
+              </div>
+              <div style={{ fontFamily: "Georgia, serif", fontSize: 18, fontWeight: 700, color: "#c0392b", flexShrink: 0 }}>
+                {c.coste}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={s.divider}><hr style={s.dividerLine} /></div>
+
+      <div style={s.section}>
+        <div style={s.secEyebrow}>Guía práctica</div>
+        <h2 style={s.secTitle}>Consejos <em style={s.secTitleEm}>útiles</em></h2>
+        <p style={s.secSub}>Lo que nadie te cuenta sobre tener coche en Suiza.</p>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
+          {CONSEJOS.map((c, i) => (
+            <div key={i} style={{
+              background: "white", border: "1px solid rgba(0,0,0,0.09)",
+              padding: "1.6rem", borderRadius: 2,
+            }}>
+              <div style={{ fontSize: 24, marginBottom: 10 }}>{c.icon}</div>
+              <div style={{ fontFamily: "Georgia, serif", fontSize: 15, fontWeight: 700, color: "#111", marginBottom: 8 }}>
+                {c.titulo}
+              </div>
+              <p style={{ fontSize: 13, color: "#666", fontFamily: "'Segoe UI', sans-serif", lineHeight: 1.65 }}>
+                {c.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: 40 }}>
+          <AdBanner variant="horizontal" />
+        </div>
+      </div>
     </div>
   );
 }
